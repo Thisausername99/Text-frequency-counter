@@ -21,7 +21,7 @@ typedef struct Map Map;
 
 void intialize_map(Map *map[],int size);
 
-Key * new_word(char* new);
+Key * new_word(char* new, int freq);
 
 void add_to_list(Map * map[],Key * key);
 

@@ -10,10 +10,10 @@ void initialize_map(Map * map[], int size){
 
 }
 
-Key * new_word(char* new){
+Key * new_word(char* new, int freq){
 	Key * word=(Key*)malloc(sizeof(Key));
 	word->word=new;
-	word->freq=1;
+	word->freq=freq;
 	return word;
 }
 
@@ -29,7 +29,6 @@ void add_to_list(Map * map[], Key * key){
 	else{
 
 	Map**temp_map=map;
-	
 	initialize_map(map,n*2);
 	for (int a=0;a<n;++n){
 		map[n]=temp_map[n];
