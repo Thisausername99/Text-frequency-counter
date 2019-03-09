@@ -20,7 +20,7 @@ void addToFront(char * word,int len, int freq, Node * head);
 
 Node * new_node(char*word, int length, int freq, Node* head);
 
-void contain(char* word, Node* head);
+bool contain(char* word, Node* head);
 
 void printlist(Node*head);
 

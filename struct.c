@@ -16,7 +16,9 @@ Node * new_node(char *add, int length, int freq, Node *head){
 }
 
 void addToFront(char * word,int len, int freq, Node * head) {
-   
+    if(contain(word,head)){
+    	return;
+    }
     Node * newNode = malloc(sizeof(Node));
     newNode->word=copy_word(word);
     newNode->length=len;
@@ -35,19 +37,16 @@ char *copy_word (char *word) {
   return copy;
 }
 
-void contain(char* word, Node * head){
-	Node*newnode=new_node(word, strlen(word),1, NULL);
+bool contain(char* word, Node * head){
 	while(head!=NULL){
 		if(strcmp(head->word,word)==0){
 		   head->freq=head->freq+1;
-		   return;
+		   return true;
 		}
 		else
 			head=head->next;	
 		}
-	
-	newnode->next=head;
-	head=newnode;
+	return false;
 }
 
 void printlist(Node*head){  
