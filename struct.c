@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "struct.h"
+#include <assert.h>
 
 
 
@@ -15,8 +16,9 @@ Node * new_node(char *add, int length, int freq, Node *head){
 }
 
 void addToFront(char * word,int len, int freq, Node * head) {
+   
     Node * newNode = malloc(sizeof(Node));
-    newNode->word = word;
+    newNode->word=copy_word(word);
     newNode->length=len;
     newNode->freq=freq;
     newNode->next = head->next;
@@ -24,7 +26,37 @@ void addToFront(char * word,int len, int freq, Node * head) {
 }
 
 
+char *copy_word (char *word) {
+  assert(word != NULL);
+  int len = strlen(word);
+  char *copy = (char *)(malloc(len+1));
+  assert(copy != NULL);
+  strcpy(copy, word);
+  return copy;
+}
 
+void contain(char* word, Node * head){
+	Node*newnode=new_node(word, strlen(word),1, NULL);
+	while(head!=NULL){
+		if(strcmp(head->word,word)==0){
+		   head->freq=head->freq+1;
+		   return;
+		}
+		else
+			head=head->next;	
+		}
+	
+	newnode->next=head;
+	head=newnode;
+}
+
+void printlist(Node*head){  
+	while(head!=NULL){
+		printf("the word is %s, it freq %i \n",head->word,head->freq);
+		head=head->next;
+	}
+
+}
 
 
 

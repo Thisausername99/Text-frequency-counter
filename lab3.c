@@ -8,6 +8,8 @@
   #include "struct.h"
   #include <errno.h>
 
+ 
+
   extern int errno;
 
  Node * new_node(char*word, int length, int freq, Node* head);
@@ -43,33 +45,26 @@
 	char temp;
 	bool end =false;
 	while (read(fd,buffer,1)!=0){
-  	write(2,buffer,1);
+    write(2,buffer,1);
     temp=*(buffer);
-
     make_to_word[n]=temp;
-    make_to_word[n+1]='\0';
     ++n;
+    //printf("after %s \n",make_to_word);
+
     if(strcmp(buffer,",")==0){
+    make_to_word[n-1]='\0';
     addToFront(make_to_word,strlen(make_to_word),1,head);
+    printf("append the word %s\n",make_to_word);
+    //empty(make_to_word);
+    n=0;
+    continue; 
     
-    printf("append the word %s",make_to_word);
-    break;
-  	//make_to_word[n+1]='\0";
-   // add_to_front(new_node(make_to_word,strlen(make_to_word),1),head);
-  	//printf(" append the word %s",make_to_word);
-  	//lseek(fd,strlen(make_to_word),SEEK_SET);
-
     //++n;
+	 }
 	}
-	//else
 
-  	//add_to_front(new_node(make_to_word,strlen(make_to_word),1),head);
-  	//continue;
-  	//break;*/
-  	}
-  	
-  	//make_to_word[n]='\0';
-  printf("the word %s ",head->next->word);
+
+  printlist(head);
 	if(close(fd)==0){
     printf("No error\n");
   }

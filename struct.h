@@ -14,12 +14,15 @@ struct  Node{
 };
 typedef struct Node Node;
 
+char *copy_word (char *word);
 
 void addToFront(char * word,int len, int freq, Node * head);
 
 Node * new_node(char*word, int length, int freq, Node* head);
 
-bool contain(char* word, Node* head);
+void contain(char* word, Node* head);
+
+void printlist(Node*head);
 
 /*struct Map{
 	Key * key;
