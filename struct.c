@@ -3,7 +3,36 @@
 #include <string.h>
 #include "struct.h"
 
-void initialize_map(Map * map[], int size){
+
+
+Node * new_node(char *add, int length, int freq, Node *head){
+	Node* new_word=(Node*)malloc(sizeof(Node));
+	new_word->word=add;
+	new_word->length=length;
+	new_word->freq=freq;
+	new_word->next=head;
+	return new_word;
+}
+
+void addToFront(char * word,int len, int freq, Node * head) {
+    Node * newNode = malloc(sizeof(Node));
+    newNode->word = word;
+    newNode->length=len;
+    newNode->freq=freq;
+    newNode->next = head->next;
+    head->next = newNode;
+}
+
+
+
+
+
+
+
+
+
+
+/*void initialize_map(Map * map[], int size){
 	for(int n=0;n<size;++n){
 		map[n]=(Map*)malloc(sizeof(Map));
 	}
@@ -55,4 +84,4 @@ void print_freq(Map *map[]){
 	printf("%s : %i\n",map[count]->key->word,map[count]->key->freq);	
 	++count;
 	}
-}
+}*/

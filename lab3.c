@@ -6,9 +6,12 @@
   #include <stdlib.h>
   #include <string.h>
   #include "struct.h"
+  #include <errno.h>
 
-  Node * new_node(char*word, int length, int freq);
-  void add_to_front(Node* new, Node* head);
+  extern int errno;
+
+ Node * new_node(char*word, int length, int freq, Node* head);
+ void addToFront(char * word,int len, int freq, Node * head);
 
   
   void empty(char array[20]){
@@ -22,7 +25,8 @@
 
   int main(int argc, char * argv[]){
 
-  	Node*head=NULL;
+  	Node*head=new_node("",0,0,NULL);
+
   	char *buffer=(char*)malloc(sizeof(char));
   	char make_to_word[20];
     if(argc==1){
@@ -30,9 +34,7 @@
       //int fd=open(STDIN_FILENO,O_RDONLY);
       while(read(STDIN_FILENO,buffer,1)!=0){
         write(STDOUT_FILENO,buffer,1);
-        //if(strcmp(buffer,"\n")==0){
-         // break;
-       // }
+        //if(strcmp())
     }
   }
   else{
@@ -41,24 +43,40 @@
 	char temp;
 	bool end =false;
 	while (read(fd,buffer,1)!=0){
-  	printf("%s",buffer);
-    /*if(strcmp(buffer,",")!=0){                    //  strcmp(buffer," ")!=0 && strcmp(buffer,"\n ")!=0){
-  	temp=*(buffer);
-  	make_to_word[n]=temp;
-  	make_to_word[n+1]='\0';
-  	//printf(" append the word %s",make_to_word);
-  	++n;
-	}
-	else
+  	write(2,buffer,1);
+    temp=*(buffer);
 
-  	add_to_front(new_node(make_to_word,strlen(make_to_word),1),head);
+    make_to_word[n]=temp;
+    make_to_word[n+1]='\0';
+    ++n;
+    if(strcmp(buffer,",")==0){
+    addToFront(make_to_word,strlen(make_to_word),1,head);
+    
+    printf("append the word %s",make_to_word);
+    break;
+  	//make_to_word[n+1]='\0";
+   // add_to_front(new_node(make_to_word,strlen(make_to_word),1),head);
+  	//printf(" append the word %s",make_to_word);
+  	//lseek(fd,strlen(make_to_word),SEEK_SET);
+
+    //++n;
+	}
+	//else
+
+  	//add_to_front(new_node(make_to_word,strlen(make_to_word),1),head);
   	//continue;
-  	break;*/
+  	//break;*/
   	}
   	
   	//make_to_word[n]='\0';
-  	//printf("the word %s ",head->word);
-	close(fd);
+  printf("the word %s ",head->next->word);
+	if(close(fd)==0){
+    printf("No error\n");
+  }
+  else
+    printf("There error is %i",errno);
+    exit(-1);
+  
   }
   printf("wassup\n");
 	return 0;  	
