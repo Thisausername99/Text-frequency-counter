@@ -22,35 +22,34 @@
   	}
   }
 
+  bool check_letter(char c){ // check if it the letter
+  if( (c>='a' && c<='z') || (c>='A' && c<='Z'))
+        return true;
+    else
+        printf("%c is not an alphabet.",c);
+      return false;
+
+  }
 
 
 
   int main(int argc, char * argv[], char * envp[]){
-
   	Node*head=new_node("",0,0,NULL);
-
-  	char *buffer=(char*)malloc(sizeof(char));
+    char *buffer=(char*)malloc(sizeof(char));
   	char make_to_word[20];
-    if(argc==1 && envp!=NULL){
-      
-      int fd=open(getenv(envp[0]),O_RDONLY);
+    if(argc==1){
+      if(getenv("WORD_FREAK")==NULL){
+      while(read(STDIN_FILENO,buffer,1)!=0){
+        write(STDOUT_FILENO,buffer,1);
+          }
+        }
+      else{
+      int fd=open(getenv("WORD_FREAK"),O_RDONLY);
       while(read(fd,buffer,1)!=0){
-        write(fd,buffer,1);
+        write(2,buffer,1);
       }
     }
-
-
-    else if(argc==1){
-      printf(" no argument \n");
-      //int fd=open(STDIN_FILENO,O_RDONLY);
-      while((ssize_t num_read=read(STDIN_FILENO,buffer,1))!=0){
-        write(STDOUT_FILENO,buffer,1);
-        }
-        if(num_read==0){
-          printf("end");
-          break;
-        }
-    }
+  }
   else{
   int fd=open(argv[1],O_RDONLY);
 	int n=0;
@@ -66,19 +65,17 @@
     }
     make_to_word[n]=temp;
     ++n;
-  }
+    }
 	
+  
 
-
-  printlist(head);
 	if(close(fd)==0){
     printf("No error\n");
   }
   else
     printf("There error is %i",errno);
     exit(-1);
-  
   }
-  printf("wassup\n");
+  //printf("wassup\n");
 	return 0;  	
 }

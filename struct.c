@@ -16,7 +16,11 @@ Node * new_node(char *add, int length, int freq, Node *head){
 }
 
 void addToFront(char * word,int len, int freq, Node * head) {
-    if(contain(word,head)){
+    if(strcmp(" ",word)==0){
+    	return;
+    }
+
+    else if(contain(word,head)){
     	return;
     }
     Node * newNode = malloc(sizeof(Node));
