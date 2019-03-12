@@ -3,8 +3,9 @@
 #include <string.h>
 #include "struct.h"
 #include <assert.h>
+#include "word.h"
 
-
+int max_len=0; // keep track for formatting
 
 Node * new_node(char *add, int length, int freq, Node *head){
 	Node* new_word=(Node*)malloc(sizeof(Node));
@@ -19,27 +20,20 @@ void addToFront(char * word,int len, int freq, Node * head) {
     if(strcmp(" ",word)==0){
     	return;
     }
-
     else if(contain(word,head)){
     	return;
     }
     Node * newNode = malloc(sizeof(Node));
     newNode->word=copy_word(word);
     newNode->length=len;
+    if(len>max_len){
+    	max_len=len;
+    }
     newNode->freq=freq;
     newNode->next = head->next;
     head->next = newNode;
 }
 
-
-char *copy_word (char *word) {
-  assert(word != NULL);
-  int len = strlen(word);
-  char *copy = (char *)(malloc(len+1));
-  assert(copy != NULL);
-  strcpy(copy, word);
-  return copy;
-}
 
 bool contain(char* word, Node * head){
 	while(head!=NULL){
@@ -53,12 +47,32 @@ bool contain(char* word, Node * head){
 	return false;
 }
 
-void printlist(Node*head){  
-	while(head!=NULL){
-		printf("the word is %s, it freq %i \n",head->word,head->freq);
-		head=head->next;
-	}
 
+
+void format(char*word){ //format to align
+  int len=strlen(word);
+  int max_len=10;
+  char farray[max_len];
+  //sprintf(num,"%i",22);
+  for(int n=0;n<=max_len;++n){
+  	farray[n]=*(word+n);
+    if(n>=len && n<max_len){
+    farray[n]='-';
+		}
+    else if(n==max_len){
+    farray[n]='\n';
+    }
+  }
+  write(STDOUT_FILENO,farray,strlen(farray));
+}
+
+void print_freq(Node*head){ //format everynode
+head=head->next;
+while(head!=NULL){
+	printf("%s\n",head->word);
+	format(head->word);
+	head=head->next;
+	}
 }
 
 
@@ -67,56 +81,4 @@ void printlist(Node*head){
 
 
 
-/*void initialize_map(Map * map[], int size){
-	for(int n=0;n<size;++n){
-		map[n]=(Map*)malloc(sizeof(Map));
-	}
 
-}
-
-Key * new_word(char* new, int freq){
-	Key * word=(Key*)malloc(sizeof(Key));
-	word->word=new;
-	word->freq=freq;
-	return word;
-}
-
-void add_to_list(Map * map[], Key * key){
-	static int n=0;
-	if(contain(map,key->word)){
-		return;
-	}
-	if(n<=100){
-		map[n]->key=key;
-		++n;
-	}
-	else{
-
-	Map**temp_map=map;
-	initialize_map(map,n*2);
-	for (int a=0;a<n;++n){
-		map[n]=temp_map[n];
-	}
-	map[n]->key=key;
-	free (temp_map);
-	}
-}
-
-
-bool contain (Map *map[] , char * search){
-	int n=0;
-	while(map[n]->key!=NULL){
-		if(strcmp(map[n]->key->word,search)==0){return true;}
-		++n;
-	}
-	return false;
-}
-
-void print_freq(Map *map[]){
-	int count=0;
-	while(map[count]->key!=NULL){
-	
-	printf("%s : %i\n",map[count]->key->word,map[count]->key->freq);	
-	++count;
-	}
-}*/

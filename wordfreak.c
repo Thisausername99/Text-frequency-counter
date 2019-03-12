@@ -1,12 +1,13 @@
-  #include <sys/types.h>
-  #include <sys/stat.h>
-  #include <fcntl.h>
-  #include <unistd.h>
-  #include <stdio.h>
-  #include <stdlib.h>
-  #include <string.h>
-  #include "struct.h"
-  #include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "struct.h"
+#include <errno.h>
+#include "word.h"  
 
  
 
@@ -22,15 +23,6 @@
   	}
   }
 
-  bool check_letter(char c){ // check if it the letter
-  if( (c>='a' && c<='z') || (c>='A' && c<='Z'))
-        return true;
-    else
-        printf("%c is not an alphabet.",c);
-      return false;
-
-  }
-
 
 
   int main(int argc, char * argv[], char * envp[]){
@@ -38,44 +30,47 @@
     char *buffer=(char*)malloc(sizeof(char));
   	char make_to_word[20];
     if(argc==1){
-      if(getenv("WORD_FREAK")==NULL){
+      char* file=getenv("WORD_FREAK");
+      if(file==NULL){
       while(read(STDIN_FILENO,buffer,1)!=0){
         write(STDOUT_FILENO,buffer,1);
           }
         }
       else{
-      int fd=open(getenv("WORD_FREAK"),O_RDONLY);
+      int fd=open(file,O_RDONLY);
       while(read(fd,buffer,1)!=0){
         write(2,buffer,1);
       }
     }
   }
   else{
-  int fd=open(argv[1],O_RDONLY);
-	int n=0;
-	char temp;
-	bool end =false;
-	while(read(fd,buffer,1)!=0){
+  int n=0;
+  char temp;
+  char* test;
+  for(int a=1;argv[a]!=NULL;++a){
+  int fd=open(argv[a],O_RDONLY);
+  int check=-1;
+	while((check=read(fd,buffer,1))!=0){
+    //printf("%s",buffer);
     temp=*(buffer);
-    if(!check_letter(temp)){ //indicate to make a word
-    make_to_word[n]='\0';
-    addToFront(make_to_word,strlen(make_to_word),1,head); // add to linkedlist
-    n=0;
-    continue;
-    }
     make_to_word[n]=temp;
     ++n;
+    if(!check_letter(temp)){ //indicate to make a word
+      make_to_word[n-1]='\0';
+      addToFront(make_to_word,strlen(make_to_word),1,head); // add to linkedlist
+      n=0;
+    continue;
     }
-	
-  
-
-	if(close(fd)==0){
+  }
+	close(fd);
+  if(close(fd)==0){
     printf("No error\n");
   }
   else
     printf("There error is %i",errno);
     exit(-1);
   }
-  //printf("wassup\n");
-	return 0;  	
+    print_freq(head);
+}
+return 0; 
 }
