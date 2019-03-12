@@ -34,26 +34,37 @@
     if(argc==1){
       char* file=getenv("WORD_FREAK");
       if(file==NULL){
-      while(read(STDIN_FILENO,buffer,1)!=0){
-        write(STDOUT_FILENO,buffer,1);
+          while(read(STDIN_FILENO,buffer,1)!=0){
+            write(STDOUT_FILENO,buffer,1);
+            temp=*(buffer);
+            make_to_word[n]=temp;
+            ++n;
+          if(!check_letter(temp)){ //indicate to make a word
+            make_to_word[n-1]='\0';
+            addToFront(make_to_word,strlen(make_to_word),1,head); // add to linkedlist
+            n=0;
+            continue;
+            }
           }
         }
+
       else{
-      int fd=open(file,O_RDONLY);
-      while(read(fd,buffer,1)!=0){
-        temp=*(buffer);
-        make_to_word[n]=temp;
-        ++n;
-      if(!check_letter(temp)){ //indicate to make a word
-        make_to_word[n-1]='\0';
-        addToFront(make_to_word,strlen(make_to_word),1,head); // add to linkedlist
-        n=0;
-        continue;
-    }
-  }
-  close(fd);
-      }
-  }
+          int fd=open(file,O_RDONLY);
+          while(read(fd,buffer,1)!=0){
+            temp=*(buffer);
+            make_to_word[n]=temp;
+            ++n;
+          if(!check_letter(temp)){ //indicate to make a word
+            make_to_word[n-1]='\0';
+            addToFront(make_to_word,strlen(make_to_word),1,head); // add to linkedlist
+            n=0;
+            continue;
+            }
+          }
+          close(fd);
+          }
+        }
+        
   else{
   for(int a=1;argv[a]!=NULL;++a){
   int fd=open(argv[a],O_RDONLY);
@@ -78,7 +89,8 @@
     printf("There error is %i",errno);
     exit(-1);*/
   }
-    print_freq(head);
+    //print_freq(head);
 }
+print_freq(head);
 return 0; 
 }
