@@ -26,7 +26,9 @@
 
 
   int main(int argc, char * argv[], char * envp[]){
-  	Node*head=new_node("",0,0,NULL);
+  	int n=0;
+    char temp;
+    Node*head=new_node("",0,0,NULL);
     char *buffer=(char*)malloc(sizeof(char));
   	char make_to_word[20];
     if(argc==1){
@@ -39,14 +41,20 @@
       else{
       int fd=open(file,O_RDONLY);
       while(read(fd,buffer,1)!=0){
-        write(2,buffer,1);
-      }
+        temp=*(buffer);
+        make_to_word[n]=temp;
+        ++n;
+      if(!check_letter(temp)){ //indicate to make a word
+        make_to_word[n-1]='\0';
+        addToFront(make_to_word,strlen(make_to_word),1,head); // add to linkedlist
+        n=0;
+        continue;
     }
   }
+  close(fd);
+      }
+  }
   else{
-  int n=0;
-  char temp;
-  char* test;
   for(int a=1;argv[a]!=NULL;++a){
   int fd=open(argv[a],O_RDONLY);
   int check=-1;
@@ -62,13 +70,13 @@
     continue;
     }
   }
-	close(fd);
-  if(close(fd)==0){
+  close(fd);
+  /*if(close(fd)==0){
     printf("No error\n");
   }
   else
     printf("There error is %i",errno);
-    exit(-1);
+    exit(-1);*/
   }
     print_freq(head);
 }

@@ -21,7 +21,7 @@ Node * new_node(char*word, int length, int freq, Node* head);
 
 bool contain(char* word, Node* head);
 
-void format(char* word);
+void format(char* word,int freq);
 
 void print_freq(Node*head);
 

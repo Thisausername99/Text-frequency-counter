@@ -49,7 +49,7 @@ bool contain(char* word, Node * head){
 
 
 
-void format(char*word){ //format to align
+void format(char*word,int freq){ //format to align
   int len=strlen(word);
   int max_len=10;
   char farray[max_len];
@@ -69,8 +69,8 @@ void format(char*word){ //format to align
 void print_freq(Node*head){ //format everynode
 head=head->next;
 while(head!=NULL){
-	printf("%s\n",head->word);
-	format(head->word);
+	//printf("%s\n",head->word);
+	format(head->word,head->freq);
 	head=head->next;
 	}
 }
