@@ -21,7 +21,7 @@ char *copy_word (char *word) {
 
 
 bool check_letter(char c){ // check if it the letter
-  if( (c>='a' && c<='z') || (c>='A' && c<='Z'))
+  if( (c>='a' && c<='z') || (c>='A' && c<='Z') || c==39 || c=='-')
         return true;
     else
         //printf("%c is not an alphabet.",c);

@@ -50,18 +50,21 @@ bool contain(char* word, Node * head){
 
 
 void format(char*word,int freq){ //format to align
-  int len=strlen(word);
-  int max_len=10;
-  char farray[max_len];
-  //sprintf(num,"%i",22);
-  for(int n=0;n<=max_len;++n){
+  int len=strlen(word)-1;
+  char fret[7];
+  char farray[max_len+10];
+  sprintf(fret,":%i\n",freq);
+  for(int n=0;n<=max_len+1;++n){
   	farray[n]=*(word+n);
-    if(n>=len && n<max_len){
+    if(n>len && n<max_len+1){ // 
     farray[n]='-';
-		}
-    else if(n==max_len){
-    farray[n]='\n';
-    }
+	}
+	else if(n==max_len+1){
+	//farray[n]='\n';
+	//break;
+    strcat(farray,fret);
+    break;
+	}	
   }
   write(STDOUT_FILENO,farray,strlen(farray));
 }
@@ -69,7 +72,7 @@ void format(char*word,int freq){ //format to align
 void print_freq(Node*head){ //format everynode
 head=head->next;
 while(head!=NULL){
-	//printf("%s\n",head->word);
+	if(head->next==NULL){
 	format(head->word,head->freq);
 	head=head->next;
 	}
