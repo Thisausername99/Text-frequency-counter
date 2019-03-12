@@ -17,10 +17,10 @@ Node * new_node(char *add, int length, int freq, Node *head){
 }
 
 void addToFront(char * word,int len, int freq, Node * head) {
-    if(strcmp(" ",word)==0){
-    	return;
-    }
-    else if(contain(word,head)){
+    //if(strcmp(" ",word)==0){
+    //	return;
+    //}
+    if(contain(word,head)){
     	return;
     }
     Node * newNode = malloc(sizeof(Node));
@@ -51,18 +51,18 @@ bool contain(char* word, Node * head){
 
 void format(char*word,int freq){ //format to align
   int len=strlen(word)-1;
-  char fret[7];
-  char farray[max_len+10];
-  sprintf(fret,":%i\n",freq);
-  for(int n=0;n<=max_len+1;++n){
+  char fret[freq];
+  char farray[max_len];
+  sprintf(fret,":%d\n",freq);
+  for(int n=0;n<=max_len;++n){
   	farray[n]=*(word+n);
-    if(n>len && n<max_len+1){ // 
+    if(n>len && n<max_len){ // 
     farray[n]='-';
 	}
-	else if(n==max_len+1){
-	//farray[n]='\n';
-	//break;
+	else if(n==max_len){
+    //strcat(farray,":");
     strcat(farray,fret);
+    //strcat(farray,"\n");
     break;
 	}	
   }
@@ -72,12 +72,12 @@ void format(char*word,int freq){ //format to align
 void print_freq(Node*head){ //format everynode
 head=head->next;
 while(head!=NULL){
-	if(head->next==NULL){
+	//printf("%s\n",head->word);
 	format(head->word,head->freq);
 	head=head->next;
+		//}
 	}
 }
-
 
 
 
