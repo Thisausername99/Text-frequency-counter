@@ -10,7 +10,9 @@
 #define WORD_H
 
 char *copy_word (char *word);
+
 bool check_letter(char c);
 
+int freq_len(int freq);
 
 #endif

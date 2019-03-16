@@ -8,22 +8,24 @@
 
 struct  Node{
 	char*word;
-	int length;
 	int freq;
 	struct Node * next;
 };
 typedef struct Node Node;
 
 
-void addToFront(char * word,int len, int freq, Node * head);
+Node * new_node(char*word,int freq, Node* head);
 
-Node * new_node(char*word, int length, int freq, Node* head);
-
-bool contain(char* word, Node* head);
+bool contain(char* word, Node ** head);
 
 void format(char* word,int freq);
 
 void print_freq(Node*head);
 
+void prependNode(Node **head, char *word, int freq, int len);
+
+void free_node(Node*node);
+
+void free_list(Node*head);
 
 #endif

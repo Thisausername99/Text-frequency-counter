@@ -7,10 +7,10 @@
 #include <stdlib.h>
 #include <assert.h>
 
-extern int max_len;
+//extern int max_len;
 
 
-char *copy_word (char *word) {
+char *copy_word (char *word) { //copy the word by value
   assert(word != NULL);
   int len = strlen(word);
   char *copy = (char *)(malloc(len+1));
@@ -21,13 +21,18 @@ char *copy_word (char *word) {
 
 
 bool check_letter(char c){ // check if it the letter
-  if( (c>='a' && c<='z') || (c>='A' && c<='Z') || c==39 || c=='-')
+  if( (c>='a' && c<='z') || (c>='A' && c<='Z'))//check if char is letter or aphostrope
         return true;
     else
-        //printf("%c is not an alphabet.",c);
       return false;
 
 }
 
+int freq_len(int freq){
+  if(freq == 0){
+    return 0;
+  }
+  return 1 + freq_len(freq/10);
+}
 
 
