@@ -9,11 +9,24 @@
 #include "word.h" 
 #include <errno.h> 
 
+extern int errno;
+
+bool print_error(int error){
+      if(error==0){
+        return false;
+      }
+      char* error_msg;
+      sprintf(error_msg,"The error # is %i\n",error);
+      write(STDERR_FILENO,error_msg,strlen(error_msg));
+      exit(error);
+      return true;
+}
+
+
 
   int main(int argc, char * argv[], char * envp[]){
   	int n=0;
     char temp;
-    char* error=(char*)malloc(sizeof(char));
     Node*head=NULL; //head node
     char *buffer=(char*)malloc(sizeof(char)); //buffer array
   	char make_to_word[100]; //array to store the word
@@ -21,16 +34,14 @@
     if(argc==1){
       char* file=getenv("WORD_FREAK");
       if(file==NULL){
-          int check=-1;
-          while((check=read(STDIN_FILENO,buffer,1))!=0){
-            //write(STDOUT_FILENO,buffer,1);
+          while(read(STDIN_FILENO,buffer,1)!=0){
+            print_error(errno);
             temp=*(buffer);
             make_to_word[n]=temp;
             ++n;
           if(!check_letter(temp)){ //indicate to make a word
             make_to_word[n-1]='\0';
             prependNode(&head,make_to_word,1,strlen(make_to_word)); //add to list  
-            
             n=0;
             continue;
             }
@@ -40,7 +51,7 @@
       else{
           
           int fd=open(file,O_RDONLY);
-          perror(error);
+          print_error(errno);
           if(fd==-1){//exit if file is not exit
             exit(EXIT_FAILURE);
           }
@@ -58,16 +69,17 @@
             }
           }
           close(fd);
-          perror(error);
+          print_error(errno);
           }
         }
   else{
   
   for(int a=1;argv[a]!=NULL;++a){
+  
   int fd=open(argv[a],O_RDONLY);
-  perror(error);
-  int check=-1;
-	while((check=read(fd,buffer,1))!=0){
+  print_error(errno);
+
+	while(read(fd,buffer,1)!=0){
     printf("%s",buffer);
     temp=*(buffer);
     make_to_word[n]=temp;
@@ -80,7 +92,7 @@
     }
   }
   close(fd);
-  perror(error);
+  print_error(errno);
   }
 }
 
