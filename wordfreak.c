@@ -16,7 +16,7 @@
     char* error=(char*)malloc(sizeof(char));
     Node*head=NULL; //head node
     char *buffer=(char*)malloc(sizeof(char)); //buffer array
-  	char make_to_word[20]; //array to store the word
+  	char make_to_word[100]; //array to store the word
 
     if(argc==1){
       char* file=getenv("WORD_FREAK");

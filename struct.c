@@ -51,8 +51,9 @@ bool contain(char* word, Node ** head){
 
 void format(char*word,int freq){ //format to align
   int len=strlen(word);
-  char farray[max_len+freq_len(freq)+20]; //set size for the buffer
-  sprintf(farray,"%s %*s %2i\n",word,max_len-len+1,":",freq); // use to format
+  char farray[max_len+freq_len(freq)+50]; //set size for the buffer
+  sprintf(farray,"%s %*s %2i\n",word,max_len-len+1,":",freq);
+  strcat(farray,"\0"); // use to format
   write(STDOUT_FILENO,farray,strlen(farray));
 }
 

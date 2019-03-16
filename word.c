@@ -21,7 +21,7 @@ char *copy_word (char *word) { //copy the word by value
 
 
 bool check_letter(char c){ // check if it the letter
-  if( (c>='a' && c<='z') || (c>='A' && c<='Z'))//check if char is letter or aphostrope
+  if( (c>='a' && c<='z') || (c>='A' && c<='Z') || c==39)//check if char is letter or aphostrope
         return true;
     else
       return false;
