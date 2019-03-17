@@ -20,11 +20,12 @@ int main(int argc, char * argv[], char * envp[]) {
   char make_to_word[100]; //array to store the word
 
 if (argc > 1) {
-    for (int a = 1; argv[a] != NULL; ++a) { //goes through each arguments
-      int fd = open(argv[a], O_RDONLY); //opens file to be read
-      print_error(errno); //writes any errors
+  for (int a = 1; argv[a] != NULL; ++a) { //goes through each arguments
+    int fd = open(argv[a], O_RDONLY); //opens file to be read
+    print_error(errno); //writes any errors
 
       while (read(fd, buffer, 1) != 0) {
+        print_error(errno); //writes any errors
         temp = * (buffer); //temp points to buffer's character
         make_to_word[n] = temp; //makes word using temp chars
         ++n; //increment counter
@@ -35,8 +36,8 @@ if (argc > 1) {
           continue;
         }
       }
-      close(fd); //close file
-      print_error(errno); //writes any errors
+    close(fd); //close file
+    print_error(errno); //writes any errors
     }
   } 
 
@@ -45,6 +46,7 @@ else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
     print_error(errno); //writes any errors
 
     while (read(fd, buffer, 1) != 0) {
+      print_error(errno); //writes any errors
       temp = * (buffer); //temp points to buffer's character
       make_to_word[n] = temp; //makes word using temp chars
       ++n; //increment counter
@@ -55,12 +57,14 @@ else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
         continue;
       }
     }
-    close(fd); //close file
-    print_error(errno); //writes any errors
-  } 
+  close(fd); //close file
+  print_error(errno); //writes any errors
+} 
 
 else{//read in standard input 
-  while (read(STDIN_FILENO, buffer, 1) != 0) { //while not end of file
+    
+    while (read(STDIN_FILENO, buffer, 1) != 0) { //while not end of file
+      print_error(errno); //writes any errors
       temp = * (buffer); //temp points to buffer's character
       make_to_word[n] = temp; //makes word using temp chars
       ++n; //increment counter
@@ -69,13 +73,14 @@ else{//read in standard input
         prependNode( &head, make_to_word, 1, strlen(make_to_word)); //adds word to list  
         n = 0; //resets index counter
         continue;
-      }
     }
-  } 
+  }
+} 
 
 print_freq(head); //format every node and writes them
 free(buffer); //frees buffer
 free_list(head); //frees list of words
+
 return 0;
 }
 
