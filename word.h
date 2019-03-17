@@ -15,4 +15,7 @@ bool check_letter(char c);
 
 int freq_len(int freq);
 
+bool print_error(int error);
+
+
 #endif
