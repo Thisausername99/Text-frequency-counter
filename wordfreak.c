@@ -16,7 +16,7 @@ int main(int argc, char * argv[], char * envp[]) {
   int n = 0; //counter for index of make_to_word
   char temp; //temporary character
   Node * head = NULL; //head node
-  char * buffer = (char * ) malloc(sizeof(char)); //buffer array
+  char * buffer = (char * ) malloc(sizeof(char)); //allocates dynamic memory for buffer
   char make_to_word[100]; //array to store the word
 
 if (argc > 1) {
