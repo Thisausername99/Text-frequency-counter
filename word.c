@@ -15,9 +15,6 @@ char * copy_word(char * word) { //copy the word
   assert(word != NULL); //word not null
   int len = strlen(word); //length of the word
   char * copy = (char * )(malloc(len + 1)); //allocates space for the word
-  if(copy == NULL){ //check if allocation worked
-    return NULL;
-  }
   assert(copy != NULL); //copy not null
   strcpy(copy, word); //copy and word 
   return copy;
