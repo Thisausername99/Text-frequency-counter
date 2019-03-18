@@ -19,11 +19,10 @@ int main(int argc, char * argv[], char * envp[]) {
   char * buffer = (char * ) malloc(sizeof(char)); //allocates dynamic memory for buffer
   char make_to_word[100]; //array to store the word
 
-if (argc > 1) {
-  for (int a = 1; argv[a] != NULL; ++a) { //goes through each arguments
-    int fd = open(argv[a], O_RDONLY); //opens file to be read
-    print_error(errno); //writes any errors
-
+  if (argc > 1) {
+    for (int a = 1; argv[a] != NULL; ++a) { //goes through each arguments
+      int fd = open(argv[a], O_RDONLY); //opens file to be read
+      print_error(errno); //writes any errors
       while (read(fd, buffer, 1) != 0) {
         //printf("%s",buffer); //for testing
         print_error(errno); //writes any errors
@@ -41,11 +40,9 @@ if (argc > 1) {
     print_error(errno); //writes any errors
     }
   } 
-
-else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
+  else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
     int fd = open(getenv("WORD_FREAK"), O_RDONLY); //opens file to be read
     print_error(errno); //writes any errors
-
     while (read(fd, buffer, 1) != 0) {
       //printf("%s",buffer); //for testing
       print_error(errno); //writes any errors
@@ -59,12 +56,11 @@ else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
         continue;
       }
     }
-  close(fd); //close file
-  print_error(errno); //writes any errors
-} 
+    close(fd); //close file
+    print_error(errno); //writes any errors
+  } 
 
-else{//read in standard input 
-    
+  else{ //read in standard input 
     while (read(STDIN_FILENO, buffer, 1) != 0) { //while not end of file
       //printf("%s",buffer); //for testing
       print_error(errno); //writes any errors
@@ -76,14 +72,11 @@ else{//read in standard input
         prepend_node( &head, make_to_word, 1, strlen(make_to_word)); //adds word to list  
         n = 0; //resets index counter
         continue;
+      }
     }
-  }
-} 
-
+  } 
 print_freq(head); //format every node and writes them
 free(buffer); //frees buffer
 free_list(head); //frees list of words
-
 return 0;
 }
-
