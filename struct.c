@@ -19,6 +19,9 @@ int max_len = 0; // keep track for formatting
 */
 Node * new_node(char * add, int freq, Node * next_node) { //creates new word node
   Node * new_word = (Node * ) malloc(sizeof(Node)); //allocates dynamic memory
+  if(new_word == NULL){ //check to see if allocation worked
+    return NULL;
+  }
   new_word->word = copy_word(add); //sets node's word to a copy of the currently read word
   new_word->freq = freq; //sets frequency of the word
   new_word->next = next_node; //sets the next node in the list
