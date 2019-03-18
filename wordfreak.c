@@ -25,7 +25,7 @@ if (argc > 1) {
     print_error(errno); //writes any errors
 
       while (read(fd, buffer, 1) != 0) {
-        printf("%s",buffer);
+        //printf("%s",buffer); //for testing
         print_error(errno); //writes any errors
         temp = * (buffer); //temp points to buffer's character
         make_to_word[n] = temp; //makes word using temp chars
@@ -47,6 +47,7 @@ else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
     print_error(errno); //writes any errors
 
     while (read(fd, buffer, 1) != 0) {
+      //printf("%s",buffer); //for testing
       print_error(errno); //writes any errors
       temp = * (buffer); //temp points to buffer's character
       make_to_word[n] = temp; //makes word using temp chars
@@ -65,6 +66,7 @@ else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
 else{//read in standard input 
     
     while (read(STDIN_FILENO, buffer, 1) != 0) { //while not end of file
+      //printf("%s",buffer); //for testing
       print_error(errno); //writes any errors
       temp = * (buffer); //temp points to buffer's character
       make_to_word[n] = temp; //makes word using temp chars
