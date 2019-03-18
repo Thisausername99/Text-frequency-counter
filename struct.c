@@ -8,7 +8,7 @@
 
 
 extern int errno; //to print out error 
-int max_len=0; // keep track for formatting
+int max_len = 0; // keep track for formatting
 
 
 /**
@@ -18,7 +18,7 @@ int max_len=0; // keep track for formatting
   * @param Node*next_node - next Node
 */
 Node * new_node(char * add, int freq, Node * next_node) { //creates new word node
-  Node * new_word = (Node * ) malloc(sizeof(Node)); //allocates space for the node
+  Node * new_word = (Node * ) malloc(sizeof(Node)); //allocates dynamic memory
   new_word->word = copy_word(add); //sets node's word to a copy of the currently read word
   new_word->freq = freq; //sets frequency of the word
   new_word->next = next_node; //sets the next node in the list
