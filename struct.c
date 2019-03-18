@@ -10,6 +10,7 @@
 extern int errno; //to print out error 
 int max_len=0; // keep track for formatting
 
+
 /**
   * @desc allocate new memory for Node
   * @param char* add -word attribute
@@ -23,7 +24,6 @@ Node * new_node(char * add, int freq, Node * next_node) { //creates new word nod
   new_word->next = next_node; //sets the next node in the list
   return new_word;
 }
-
 
 
 /**
@@ -45,7 +45,6 @@ void prepend_node(Node ** head, char * word, int freq, int len) { //adds a new w
     * head = newNode; //head is now the new node
   }
 }
-
 
 
 /**
@@ -71,7 +70,6 @@ bool contain(char * word, Node ** head) { //checks if word is already contained 
 }
 
 
-
 /**
   * @desc format the output on consle
   * @param char* word - word to format
@@ -87,7 +85,6 @@ void format(char * word, int freq) { //aligns the word and counter
 }
 
 
-
 /**
   * @desc print out frequency of of word in every Node
   * @param Node * head - pointer to head
@@ -98,8 +95,6 @@ void print_freq(Node * head) { //format every node
     head = head->next; //go to next node
   }
 }
-
-
 
 
 /**
@@ -113,7 +108,6 @@ void free_node(Node * node) { //frees a node
   }
   return;
 }
-
 
 
 /**
