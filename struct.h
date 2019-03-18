@@ -22,7 +22,7 @@ void format(char* word,int freq);
 
 void print_freq(Node*head);
 
-void prependNode(Node **head, char *word, int freq, int len);
+void prepend_node(Node **head, char *word, int freq, int len);
 
 void free_node(Node*node);
 

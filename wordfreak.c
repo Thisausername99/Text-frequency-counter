@@ -25,13 +25,14 @@ if (argc > 1) {
     print_error(errno); //writes any errors
 
       while (read(fd, buffer, 1) != 0) {
+        printf("%s",buffer);
         print_error(errno); //writes any errors
         temp = * (buffer); //temp points to buffer's character
         make_to_word[n] = temp; //makes word using temp chars
         ++n; //increment counter
         if (!check_letter(temp)) { //indicate to make a word
           make_to_word[n - 1] = '\0'; //sets last character to end of string character
-          prependNode( &head, make_to_word, 1, strlen(make_to_word)); //adds word to list
+          prepend_node( &head, make_to_word, 1, strlen(make_to_word)); //adds word to list
           n = 0; //reset index counter
           continue;
         }
@@ -52,7 +53,7 @@ else if (getenv("WORD_FREAK") != NULL) { //if environment variable used
       ++n; //increment counter
       if (!check_letter(temp)) { //indicate to make a word
         make_to_word[n - 1] = '\0'; //sets last character to end of string character
-        prependNode( & head, make_to_word, 1, strlen(make_to_word)); //adds word to list
+        prepend_node( & head, make_to_word, 1, strlen(make_to_word)); //adds word to list
         n = 0; //resets index counter
         continue;
       }
@@ -70,7 +71,7 @@ else{//read in standard input
       ++n; //increment counter
       if (!check_letter(temp)) { //indicate to make a word
         make_to_word[n - 1] = '\0'; //sets last character to end of string character
-        prependNode( &head, make_to_word, 1, strlen(make_to_word)); //adds word to list  
+        prepend_node( &head, make_to_word, 1, strlen(make_to_word)); //adds word to list  
         n = 0; //resets index counter
         continue;
     }

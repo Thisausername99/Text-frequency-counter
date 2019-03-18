@@ -33,7 +33,7 @@ Node * new_node(char * add, int freq, Node * next_node) { //creates new word nod
   * @param int freq - freq attribute
   * @param int len - length to of the word to update max_len
 */
-void prependNode(Node ** head, char * word, int freq, int len) { //adds a new word node to the list
+void prepend_node(Node ** head, char * word, int freq, int len) { //adds a new word node to the list
   if (contain(word, head) || strcmp("", word) == 0) { //don't add anything if the word is already in the list
     return;
   } else {
