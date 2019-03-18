@@ -6,26 +6,26 @@
 #include <stdbool.h>
 
 
-struct  Node{
-	char*word;
-	int freq;
-	struct Node * next;
+struct Node {
+  char * word;
+  int freq;
+  struct Node * next;
 };
+
 typedef struct Node Node;
 
+Node * new_node(char * word, int freq, Node * head);
 
-Node * new_node(char*word,int freq, Node* head);
+bool contain(char * word, Node ** head);
 
-bool contain(char* word, Node ** head);
+void format(char * word, int freq);
 
-void format(char* word,int freq);
+void print_freq(Node * head);
 
-void print_freq(Node*head);
+void prepend_node(Node ** head, char * word, int freq, int len);
 
-void prepend_node(Node **head, char *word, int freq, int len);
+void free_node(Node * node);
 
-void free_node(Node*node);
-
-void free_list(Node*head);
+void free_list(Node * head);
 
 #endif
