@@ -15,6 +15,11 @@ Highlight:
 -Free the list and its nodes after printing out the output
 
 
+All the threee methods I applied the some one of reading the input one byte at a time to read character by character and build a word through a char array. If we encounter a space or any punctuations while reading it will indicate the end of the word then we add it to the front of the linkedlist.
+
+I have a print_error function in word that print out the error using sprintf after every call to write, open, read ,close and will exit if an error occur.
+
+
 
 
 
