@@ -7,8 +7,6 @@
 #include "word.h"
 
 
-
-
 /**
   * @desc copy the word by value not reference
   * @param char * word - word to copy
@@ -23,20 +21,16 @@ char * copy_word(char * word) { //copy the word
 }
 
 
-
-
 /**
   * @desc check if a letter is not alphabetic or apostrophe by ASCII
   * @param char c - character to check
 */
-bool check_letter(char c) { //check if it the letter
+bool check_letter(char c) { //checks if character is in the alphabet or an apostrophe
   if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == 39) //check if char is letter or apostrophe
     return true;
   else
     return false;
 }
-
-
 
 
 /**
@@ -55,8 +49,6 @@ bool print_error(int error){ //writes error message to file descriptor
 }
 
 
-
-
 /**
   * @desc get the length of a digits for format
   * @param int * freq - the frequency 
@@ -67,4 +59,3 @@ int freq_len(int freq) { //number of digits in number
   }
   return 1 + freq_len(freq / 10); //recurses and adds one
 }
-
