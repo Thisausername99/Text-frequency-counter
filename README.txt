@@ -1,6 +1,6 @@
 https://youtu.be/Lfj752ss7cc
 # project3
-Text Frequency
+Text Frequency by Huy Hoang, Veronica Gusev, and Nhan Le
 
 Highlight:
 
